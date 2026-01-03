@@ -1,68 +1,96 @@
-# Ornstein–Uhlenbeck Stochastic Process (Python)
+# Ornstein–Uhlenbeck Model for VIX (OU–VIX)
 
-![Ornstein–Uhlenbeck Process Simulation](assets/ou_process.png)
+This repository implements an **Ornstein–Uhlenbeck (OU) mean-reverting stochastic model** applied to the **VIX (Volatility Index)**.  
+The project combines **stochastic calculus**, **maximum likelihood estimation**, and **Monte Carlo simulation** to model and forecast volatility dynamics.
 
-This repository provides a complete and modular implementation of the **Ornstein–Uhlenbeck (OU) stochastic process** developed in Python. The Ornstein–Uhlenbeck process is a mean-reverting continuous-time stochastic process widely used in physics, quantitative finance, neuroscience, and stochastic modeling.
-
-The implementation prioritizes **mathematical correctness**, **clarity**, and **reproducibility**, making it suitable for both educational and academic use.
+Author: **Marc Aliaga**
 
 ---
 
-## Mathematical Background
+## 📌 Project Motivation
 
-The Ornstein–Uhlenbeck process is defined by the stochastic differential equation:
+Financial volatility is well known to exhibit **mean-reverting behavior**.  
+The VIX, in particular:
+
+- Spikes during market stress
+- Gradually reverts to a long-term average
+- Does not behave like a geometric Brownian motion
+
+The **Ornstein–Uhlenbeck process** is a natural mathematical framework to capture this behavior.
+
+---
+
+## 📐 Mathematical Model
+
+We model the VIX using the stochastic differential equation:
 
 \[
 dX_t = \theta(\mu - X_t)\,dt + \sigma\,dW_t
 \]
 
-where:
-
-- **μ** is the long-term mean  
-- **θ > 0** is the rate of mean reversion  
-- **σ > 0** is the volatility parameter  
-- **Wₜ** is a standard Wiener process (Brownian motion)
-
-This process models systems that fluctuate randomly while exhibiting a tendency to revert toward an equilibrium state.
+Where:
+- \( X_t \) = VIX value at time \( t \)
+- \( \mu \) = long-term mean
+- \( \theta \) = speed of mean reversion
+- \( \sigma \) = volatility of volatility
+- \( W_t \) = standard Brownian motion
 
 ---
 
-## Features
+## 🧠 Methodology
 
-- Numerical simulation of the Ornstein–Uhlenbeck process  
-- Discrete-time approximation of the SDE  
-- Fully configurable parameters:
-  - Mean reversion strength  
-  - Long-term mean  
-  - Volatility  
-  - Time step  
-  - Initial condition  
-- Visualization of stochastic trajectories  
-- Clean and extensible Python codebase  
+1. **Data Collection**
+   - Historical VIX data from Yahoo Finance (`^VIX`)
+   - Daily frequency since 2012
 
----
+2. **Parameter Estimation**
+   - \( \mu \): sample mean
+   - \( \theta, \sigma \): Maximum Likelihood Estimation (MLE)
 
-## Educational Explanation (Video)
+3. **Optimization**
+   - Negative log-likelihood minimization
+   - `scipy.optimize.minimize`
 
-A **conceptual and intuitive explanation** of the Ornstein–Uhlenbeck process, including its physical and mathematical interpretation, is available on my YouTube channel:
-
-▶️ **YouTube:** [markaliaga](https://www.youtube.com/@markaliaga)
-
-The video is intended to complement this repository by bridging theory and implementation.
+4. **Simulation**
+   - Exact OU solution
+   - Monte Carlo paths for future VIX trajectories
 
 ---
 
-## Intended Audience
+## 📊 Outputs
 
-This project is suitable for:
-
-- Students studying stochastic processes or stochastic calculus  
-- Researchers requiring a reference OU implementation  
-- Quantitative finance practitioners (mean-reverting models)  
-- Physicists and engineers modeling noisy dynamical systems  
+- Estimated OU parameters
+- Likelihood surface visualization
+- Monte Carlo simulations
+- Comparison between simulated and real VIX values
 
 ---
 
-## License
+## 🛠️ Technologies Used
 
-This project is provided for educational and research purposes.
+- Python 3
+- NumPy
+- SciPy
+- Matplotlib
+- yFinance
+- Jupyter / Google Colab
+
+---
+
+## ▶️ Video Explanations
+
+📺 **Full Playlist – Finance & SDEs**  
+👉 https://www.youtube.com/playlist?list=PLNwFFDTOL7s5ANo0IUVabq5dbmkgWVVlu
+
+Videos include:
+- Intuition behind mean reversion
+- Connection between finance and stochastic calculus
+- Ornstein–Uhlenbeck process explained
+- Practical modeling of the VIX
+
+---
+
+## 🚀 How to Run
+
+```bash
+pip install numpy scipy matplotlib yfinance
