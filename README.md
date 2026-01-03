@@ -24,18 +24,19 @@ The **Ornstein–Uhlenbeck process** is a natural mathematical framework to capt
 
 We model the VIX using the stochastic differential equation:
 
-\[
+\begin{equation}
 dX_t = \theta(\mu - X_t)\,dt + \sigma\,dW_t
-\]
+\end{equation}
 
-Where:
-- \( X_t \) = VIX value at time \( t \)
-- \( \mu \) = long-term mean
-- \( \theta \) = speed of mean reversion
-- \( \sigma \) = volatility of volatility
-- \( W_t \) = standard Brownian motion
+\noindent\textbf{Where:}
+\begin{itemize}
+    \item $X_t$ is the VIX value at time $t$
+    \item $\mu$ is the long-term mean
+    \item $\theta$ is the speed of mean reversion
+    \item $\sigma$ is the volatility of volatility
+    \item $W_t$ is a standard Brownian motion
+\end{itemize}
 
----
 
 ## 🧠 Methodology
 
